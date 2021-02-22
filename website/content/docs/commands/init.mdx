@@ -10,9 +10,9 @@ sidebar_title: <tt>init</tt>
 -> **Note:** Packer init does not work with legacy JSON templates. You can
 upgrade your JSON config files to HCL using the [hcl2_upgrade](/docs/commands/hcl2_upgrade) command.
 
--> **Note:** Packer init will only work with multiplugins -- that is plugins
-that are named `packer-plugin-*`. To install a single plugin binary -- that is
-`packer-provisioner-*`, `packer-builder-*`, etc. -- nothing changes, you will
+-> **Note:** Packer init will only work with multi-component plugins -- that is
+plugins that are named `packer-plugin-*`. To install a single-component plugin --
+that is `packer-provisioner-*`, `packer-builder-*`, etc. -- nothing changes, you will
 have to [install the plugin manually](/docs/plugins#installing-plugins).
 
 The `packer init` command is used to download Packer plugin binaries. This is
@@ -44,11 +44,10 @@ block :
 ```hcl
 packer {
   required_plugins {
-    myawesomecloud = {
+    happycloud = {
       version = ">= 2.7.0"
-      source = "azr/myawesomecloud"
+      source = "github.com/azr/happycloud"
     }
-    happycloud = ">= 2.7.0"
   }
 }
 ```
@@ -57,8 +56,8 @@ HashiCorp does not officially verify third party Packer plugins, plugins not und
 
 ## Plugin Selection
 Plugin selection depends on the source and version constraints defined within the `required_plugins` block.
-For each of the required plugins Packer will query the source repository `azr/myawesomecloud` whose fully qualified address
-is `https://github.com/azr/packer-plugin-myawesomecloud` for a plugin matching the version constraints for the host operating system.
+For each of the required plugins Packer will query the source repository `github.com/azr/happycloud` whose fully qualified address
+is `https://github.com/azr/packer-plugin-happycloud` for a plugin matching the version constraints for the host operating system.
 
 Packer init will install the latest found version matching the version selection
 in the `required_plugins` section. Make sure to set a correct [version
